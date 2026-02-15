@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>SocioSphere | Elite Social OS</title>
+  <link rel="icon" href="data:,">
+  
+  <!-- Preconnect to external resources for faster loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="assets/css/main.css?v=20251205">
+  <link rel="stylesheet" href="assets/css/premium-ui.css?v=20251205">
+  <link rel="stylesheet" href="assets/css/light-theme-complete.css?v=20251205">
+</head>
+
+<body>
+
+  <div class="ambient-lights">
+    <div class="glow glow-purple"></div>
+    <div class="glow glow-blue"></div>
+  </div>
+
+  <!-- ================= AUTH LAYER ================= -->
+  <section id="authShell" class="auth-shell">
+    <div class="auth-panel glass-card">
+      <div class="auth-intro">
+        <p class="eyebrow">SocioSphere</p>
+        <h2>Welcome back to the premium social OS.</h2>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" type="button" data-auth-tab="signin">Login</button>
+        <button class="auth-tab" type="button" data-auth-tab="signup">Register</button>
+        <button class="auth-tab hidden" type="button" data-auth-tab="otp" aria-hidden="true" tabindex="-1">OTP</button>
+      </div>
+
+      <form id="formSignin" class="auth-form active">
+        <div class="input-field">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="your@email.com">
+        </div>
+        <div class="input-field password-field">
+          <label>Password</label>
+          <div class="password-input">
+            <input type="password" id="loginPassword" name="password" required placeholder="Enter your password">
+            <button type="button" class="password-toggle" aria-label="Show password" data-target="loginPassword">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="auth-actions">
+          <button type="button" class="btn-link" id="btnForgotPassword">Forgot Password?</button>
+          <button type="submit" class="btn primary auth-submit">Login</button>
+        </div>
+      </form>
+
+      <form id="formSignup" class="auth-form hidden">
+        <div class="input-field"><label>Display Name</label><input type="text" name="fullName" required></div>
+        <div class="input-field"><label>Username</label><input type="text" name="username" required></div>
+        <div class="input-field"><label>Email</label><input type="email" name="email" required></div>
+        <div class="input-field password-field">
+          <label>Password</label>
+          <div class="password-input">
+            <input type="password" id="signupPassword" name="password" minlength="6" required>
+            <button type="button" class="password-toggle" aria-label="Show password" data-target="signupPassword">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn primary w-full">Create Account</button>
+      </form>
+
+      <form id="formOtp" class="auth-form hidden">
+        <div class="input-field">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="your@email.com">
+        </div>
+        <button type="button" id="btnRequestOtp" class="btn secondary w-full">Get OTP Code</button>
+        <div class="otp-inputs">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+        </div>
+        <button type="submit" class="btn primary w-full">Verify & Login</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= APP LAYER ================= -->
+  <main id="appShell" class="app-shell hidden">
+    <div class="app-grid">
+      <aside class="sidebar glass-card">
+        <div class="sidebar-logo">SocioSphere</div>
+        <nav class="nav-links">
+          <button class="nav-link active" data-target="home"><i class="fas fa-house"></i> <span>Home</span></button>
+          <button class="nav-link" data-target="explore"><i class="fas fa-compass"></i> <span>Explore</span></button>
+          <button class="nav-link" data-target="trips"><i class="fas fa-map-marked-alt"></i> <span>Trips</span></button>
+          <button class="nav-link" data-target="leaderboard"><i class="fas fa-trophy"></i>
+            <span>Leaderboard</span></button>
+          <button class="nav-link" data-target="messages"><i class="fas fa-envelope"></i> <span>Messages</span></button>
+          <button class="nav-link" data-target="profile"><i class="fas fa-user-circle"></i>
+            <span>Profile</span></button>
+          <button class="nav-link hidden" id="navAdmin" data-target="admin"><i class="fas fa-shield-alt"></i>
+            <span>Admin</span></button>
+        </nav>
+        <div class="sidebar-actions">
+          <button class="btn ghost logout-btn" id="btnLogout" type="button"><i
+              class="fas fa-arrow-right-from-bracket"></i> Logout</button>
+        </div>
+      </aside>
+
+      <section class="main-feed">
+        <header class="feed-header">
+          <div class="header-left">
+            <div>
+              <h2 id="pageTitle">Home</h2>
+              <p id="pageSubtitle" class="header-subtitle">Curated for you</p>
+            </div>
+            <div id="liveStatus" class="connection-pill">
+              <span class="dot"></span>
+              <span id="liveStatusText">Live</span>
+            </div>
+          </div>
+          <div class="header-right">
+            <div class="search-bar" style="position:relative;">
+              <i class="fas fa-search"></i>
+              <input type="text" id="globalSearch" placeholder="Search users, posts, destinations...">
+              <button id="btnClearSearch" class="ghost-icon hidden"><i class="fas fa-times"></i></button>
+              <div id="searchResults" class="search-results hidden"
+                style="position:absolute; top:100%; left:0; right:0; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; margin-top:8px; max-height:400px; overflow-y:auto; z-index:1000; box-shadow:0 4px 20px rgba(0,0,0,0.2);">
+              </div>
+            </div>
+            <button class="btn secondary icon-btn" id="btnTranslator" title="Translator">
+              <i class="fas fa-language"></i>
+            </button>
+            <button class="btn secondary icon-btn" id="btnThemeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <button class="btn secondary icon-btn" id="btnKeyboardHelp" title="Keyboard Shortcuts (Ctrl+K)" style="position: relative;">
+              <i class="fas fa-keyboard"></i>
+              <span style="font-size: 10px; position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">⌘</span>
+            </button>
+            <button class="btn secondary icon-btn" id="btnNotifications" style="position: relative;">
+              <i class="fas fa-bell"></i>
+              <span class="badge" id="notifBadge"></span>
+            </button>
+            <div id="headerAvatar" class="avatar-fallback header-avatar">U</div>
+          </div>
+        </header>
+
+        <div id="viewsContainer" class="content-view">
+          <!-- HOME -->
+          <section id="view-home">
+            <div class="stories-strip card" id="storyRail">
+              <div class="story-empty">Loading stories...</div>
+            </div>
+
+            <div id="homeFilters" class="filter-row card">
+              <button class="filter-chip active" data-filter="all"><i class="fas fa-globe"></i> All</button>
+              <button class="filter-chip" data-filter="media"><i class="fas fa-photo-video"></i> Media</button>
+            </div>
+
+            <div class="card composer-inline">
+              <div class="composer-avatar avatar-fallback" id="composerAvatar">S</div>
+              <div class="composer-body">
+                <textarea id="postInput" rows="2" placeholder="What's happening?"></textarea>
+
+                <div id="inlineMediaPreview" class="media-preview hidden">
+                  <div class="preview-thumb" id="inlineMediaThumb"></div>
+                  <div class="preview-meta">
+                    <div>
+                      <p id="inlineMediaName"></p>
+                      <small id="inlineMediaSize"></small>
+                    </div>
+                    <button class="ghost-icon" data-target="inline" type="button" id="inlineMediaRemove"><i
+                        class="fas fa-times"></i></button>
+                  </div>
+                </div>
+
+                <div class="composer-actions">
+                  <div class="composer-tools">
+                    <button class="ghost-icon" id="btnInlineUpload" type="button"><i class="fas fa-image"></i></button>
+                    <button class="ghost-icon" id="btnGifPicker" type="button"><i class="fas fa-film"></i></button>
+                    <button class="ghost-icon" id="btnAiGen" type="button" title="AI Magic"><i
+                        class="fas fa-wand-magic-sparkles"></i></button>
+                    <button class="ghost-icon" id="btnAiPolish" type="button" title="Polish draft"><i
+                        class="fas fa-pen-fancy"></i></button>
+                    <input type="file" id="inlineMediaInput" accept="image/*,video/*" hidden>
+                  </div>
+                  <button class="btn primary" id="btnPost">Post</button>
+                </div>
+                <div class="composer-ai-bar" id="composerAiBar">
+                  <button class="composer-ai-chip" id="btnComposerSpark" type="button">
+                    <i class="fas fa-bolt"></i>
+                    Inspire me
+                  </button>
+                  <button class="composer-ai-chip" id="btnComposerPolish" type="button">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    Improve my words
+                  </button>
+                  <button class="composer-ai-chip" id="btnComposerChat" type="button">
+                    <i class="fas fa-brain"></i>
+                    Open AI studio
+                  </button>
+                </div>
+                <div id="aiIdeaStrip" class="ai-idea-strip hidden">
+                  <div class="ai-idea-header">
+                    <div>
+                      <p class="eyebrow">Gemini Copilot</p>
+                      <h4>Sparks for your post</h4>
+                    </div>
+                    <button class="ghost-icon" id="btnRefreshAiIdeas" type="button" title="Refresh ideas"><i
+                        class="fas fa-rotate"></i></button>
+                  </div>
+                  <div id="aiIdeaChips" class="ai-idea-chips"></div>
+                </div>
+              </div>
+            </div>
+            <div id="aiCompanionCard" class="card ai-companion hidden">
+              <div class="ai-companion-head">
+                <div>
+                  <p class="eyebrow">Need inspo?</p>
+                  <h3>Gemini Copilot</h3>
+                </div>
+                <button class="ghost-icon" id="btnAiCompanionRefresh" type="button"><i
+                    class="fas fa-rotate"></i></button>
+              </div>
+              <p class="ai-companion-copy">Tap a prompt to drop it into your composer or let Gemini polish what you've
+                written.</p>
+              <div id="aiCompanionList" class="ai-companion-list"></div>
+              <div class="ai-companion-actions">
+                <button class="btn secondary" id="btnAiImproveText"><i class="fas fa-wand-magic-sparkles"></i> Polish my
+                  draft</button>
+                <button class="btn ghost" id="btnAiOpenSheet" type="button"><i class="fas fa-lightbulb"></i> More
+                  ideas</button>
+              </div>
+            </div>
+
+            <div class="feed-stack" id="feedList"></div>
+          </section>
+
+          <!-- EXPLORE -->
+          <section id="view-explore" class="hidden">
+            <!-- Sticky Category Filters -->
+            <div class="explore-filters-sticky">
+              <div class="explore-filter-chips">
+                <button class="filter-pill active" data-explore-filter="for-you">For You</button>
+                <button class="filter-pill" data-explore-filter="trending">Trending</button>
+                <button class="filter-pill" data-explore-filter="trips">Trips</button>
+                <button class="filter-pill" data-explore-filter="creators">Creators</button>
+                <button class="filter-pill" data-explore-filter="nearby">Near Me</button>
+              </div>
+              <div class="explore-view-toggle">
+                <button class="view-toggle-btn active" id="gridViewBtn" title="Grid View"><i class="fas fa-th"></i></button>
+                <button class="view-toggle-btn" id="mapViewBtn" title="Map View"><i class="fas fa-map"></i></button>
+              </div>
+            </div>
+
+            <!-- Contextual Greeting -->
+            <div class="explore-greeting">
+              <div>
+                <div id="exploreGreetingTitle" class="explore-greeting-title">Explore</div>
+                <div id="exploreGreetingSubtitle" class="explore-greeting-sub">Discover what the community is doing right now.</div>
+              </div>
+            </div>
+
+            <!-- Hero Carousel (Trending Now) -->
+            <div class="explore-hero-section">
+              <div class="hero-label">Trending Now</div>
+              <div class="hero-carousel" id="heroCarousel">
+                <!-- Content loaded by JS -->
+              </div>
+              <div class="carousel-fade-right"></div>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div id="exploreGrid" class="explore-bento-grid"></div>
+
+            <!-- Map View (Hidden by default) -->
+            <div id="mapViewContainer" class="explore-map-view hidden">
+              <div id="explorerMap" style="width:100%; height:100%;"></div>
+            </div>
+          </section>
+
+          <!-- TRIPS -->
+          <section id="view-trips" class="hidden">
+            <div class="journeys-head">
+              <div>
+                <h2>Travel Trips</h2>
+                <p class="header-subtitle">Join or create your next adventure</p>
+              </div>
+              <button class="btn primary" onclick="window.openComposer('trip')">
+                <i class="fas fa-plus"></i> Create Trip
+              </button>
+            </div>
+            <div id="tripList" class="journey-grid"></div>
+          </section>
+
+          <!-- LEADERBOARD -->
+          <section id="view-leaderboard" class="hidden">
+            <div class="card">
+              <div style="padding: 20px; border-bottom: 1px solid var(--border);">
+                <h2>Daily Leaderboard</h2>
+                <p class="header-subtitle">Top creators based on post likes (updates every 24 hours)</p>
+              </div>
+              <div id="lbPodium"
+                style="display: flex; justify-content: center; align-items: flex-end; gap: 20px; padding: 30px; background: linear-gradient(135deg, rgba(29,155,240,0.1), transparent);">
+              </div>
+              <div id="lbList" style="padding: 20px;"></div>
+            </div>
+          </section>
+
+          <!-- MESSAGES -->
+          <section id="view-messages" class="hidden">
+            <div class="messages-shell">
+              <div class="thread-list" id="chatList"></div>
+              <div class="chat-panel">
+                <div class="chat-panel-head">
+                  <div>
+                    <p class="chat-title" id="chatHeader">Select a chat</p>
+                    <small id="chatSubline">Choose a contact to open the thread.</small>
+                  </div>
+                  <div class="chat-toolbar" id="chatToolbar">
+                    <button class="ghost-icon" id="btnChatCall" data-tool="call" title="Start voice call"><i
+                        class="fas fa-phone"></i></button>
+                    <button class="ghost-icon" id="btnChatVideo" data-tool="video" title="Start video call"><i
+                        class="fas fa-video"></i></button>
+                    <button class="ghost-icon" id="btnDeleteChat" title="Delete this chat"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+                <div class="chat-panel-body" id="msgArea"></div>
+                <form id="formSendMsg" class="chat-input-bar">
+                  <input type="file" id="chatFileInput" accept="image/*,video/*,application/pdf,.doc,.docx"
+                    style="display:none;">
+                  <button type="button" class="btn secondary icon-btn" id="btnChatFile" title="Upload file"
+                    style="padding:10px;"><i class="fas fa-paperclip"></i></button>
+                  <button type="button" class="btn secondary icon-btn" id="btnChatGif" title="Insert GIF"
+                    style="padding:10px;"><i class="fas fa-film"></i></button>
+                  <input type="text" name="content" placeholder="Type a message..." autocomplete="off"
+                    id="chatMessageInput" style="flex:1;">
+                  <button type="submit" class="btn primary" style="padding:10px 16px;"><i
+                      class="fas fa-paper-plane"></i></button>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          <!-- NOTIFICATIONS -->
+          <section id="view-notifications" class="hidden">
+            <h3>Recent Activity</h3>
+            <div class="card" style="margin-top: 20px; padding: 0;">
+              <div id="notifList"></div>
+            </div>
+          </section>
+
+          <!-- PROFILE -->
+          <section id="view-profile" class="hidden">
+            <div class="profile-hero">
+              <div class="profile-banner" id="profileBanner"></div>
+              <div class="profile-card" id="profileHeader"></div>
+            </div>
+            <div class="profile-tabs" id="profileTabs">
+              <button class="profile-tab active" data-tab="posts">Posts</button>
+              <button class="profile-tab" data-tab="trips">Trips</button>
+            </div>
+            <div id="profileFeed" class="profile-feed"></div>
+            <div id="profileTrips" class="profile-feed hidden"></div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav id="mobileNav" class="mobile-nav hidden">
+    <button class="mobile-nav-btn active" data-target="home"><i class="fas fa-house"></i><span>Home</span></button>
+    <button class="mobile-nav-btn" data-target="explore"><i class="fas fa-compass"></i><span>Explore</span></button>
+    <button class="mobile-nav-btn" data-target="messages"><i class="fas fa-comment-dots"></i><span>Chat</span></button>
+    <button class="mobile-nav-btn" id="btnMobileMenu" type="button"><i
+        class="fas fa-ellipsis-h"></i><span>Menu</span></button>
+  </nav>
+
+  <button id="composeFab" class="compose-fab hidden" style="bottom: 30px; right: 30px;">
+    <i class="fas fa-plus"></i>
+  </button>
+  <button id="aiFab" class="compose-fab hide-mobile hidden"
+    style="bottom: 100px; right: 30px; background: var(--bg-card); color: var(--text-main); border:1px solid var(--border);">
+    <i class="fas fa-robot"></i>
+  </button>
+
+
+  <div id="composerModal" class="modal-shell hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Create</p>
+          <h3>What's on your mind?</h3>
+        </div>
+        <button class="ghost-icon" id="composerClose"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="composer-tabs" id="composerTabs">
+        <button class="composer-tab active" data-mode="post"><i class="fas fa-quote-left"></i> Moment</button>
+        <button class="composer-tab" data-mode="story"><i class="fas fa-broadcast-tower"></i> Story</button>
+        <button class="composer-tab" data-mode="trip"><i class="fas fa-map"></i> Trip</button>
+      </div>
+
+      <form id="composerForm">
+        <div class="composer-section active" data-mode="post">
+          <div class="input-field">
+            <label>What happened?</label>
+            <textarea name="postContent" rows="3" placeholder="Paint the scene..."></textarea>
+          </div>
+          <div class="input-field">
+            <label>Upload Media <small>(JPG, PNG, MP4 up to 6MB)</small></label>
+            <div class="upload-dropzone" id="composerDropzone">
+              <input type="file" id="composerFileInput" accept="image/*,video/*">
+              <div class="dropcopy">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop or <span>browse files</span></p>
+              </div>
+            </div>
+            <div class="media-preview hidden" id="composerMediaPreview">
+              <div class="preview-thumb" id="composerMediaThumb"></div>
+              <div class="preview-meta">
+                <div>
+                  <p id="composerMediaName"></p>
+                  <small id="composerMediaSize"></small>
+                </div>
+                <button class="ghost-icon" data-target="composer" type="button" id="composerMediaRemove"><i
+                    class="fas fa-times"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="composer-section" data-mode="story">
+          <div class="input-field">
+            <label>Upload Media <small>(JPG, PNG, MP4 up to 10MB)</small></label>
+            <div class="upload-dropzone" id="storyDropzone">
+              <input type="file" id="storyFileInput" accept="image/*,video/*">
+              <div class="dropcopy">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop or <span>browse files</span></p>
+              </div>
+            </div>
+            <div class="media-preview hidden" id="storyMediaPreview">
+              <div class="preview-thumb" id="storyMediaThumb"></div>
+              <div class="preview-meta">
+                <div>
+                  <p id="storyMediaName"></p>
+                  <small id="storyMediaSize"></small>
+                </div>
+                <button class="ghost-icon" type="button" id="storyMediaRemove"><i class="fas fa-times"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Or enter Media URL</label>
+            <input type="url" name="storyMedia" placeholder="Image or video URL (optional if uploading)">
+          </div>
+          <div class="input-field">
+            <label>Caption</label>
+            <input type="text" name="storyCaption" placeholder="Give it context">
+          </div>
+        </div>
+
+        <div class="composer-section" data-mode="trip">
+          <div class="composer-grid">
+            <div class="input-field"><label>Title</label><input type="text" name="tripTitle"
+                placeholder="Marakesh Night Run"></div>
+            <div class="input-field"><label>City</label><input type="text" name="tripCity" placeholder="City"></div>
+            <div class="input-field"><label>Country</label><input type="text" name="tripCountry" placeholder="Country">
+            </div>
+            <div class="input-field"><label>Start</label><input type="date" name="tripStart"></div>
+            <div class="input-field"><label>End</label><input type="date" name="tripEnd"></div>
+            <div class="input-field"><label>Max Guests</label><input type="number" name="tripGuests" value="5" min="1">
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Cover Image <small>(optional)</small></label>
+            <div class="upload-dropzone" id="tripDropzone">
+              <input type="file" id="tripFileInput" accept="image/*">
+              <div class="dropcopy">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop or <span>browse files</span></p>
+              </div>
+            </div>
+            <div class="media-preview hidden" id="tripMediaPreview">
+              <div class="preview-thumb" id="tripMediaThumb"></div>
+              <div class="preview-meta">
+                <div>
+                  <p id="tripMediaName"></p>
+                  <small id="tripMediaSize"></small>
+                </div>
+                <button class="ghost-icon" data-target="trip" type="button" id="tripMediaRemove"><i
+                    class="fas fa-times"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Host Mobile <small>(shared with confirmed guests)</small></label>
+            <input type="tel" name="tripContact" placeholder="+1 555 123 4567">
+          </div>
+          <div class="input-field">
+            <label>Description</label>
+            <textarea name="tripDescription" rows="2" placeholder="Why should pioneers join?"></textarea>
+          </div>
+        </div>
+
+        <button class="btn primary" type="submit" style="width: 100%; margin-top: 10px;">Launch</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="editProfileModal" class="modal-shell hidden">
+    <div class="modal-card edit-profile-card">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Identity</p>
+          <h3>Update profile</h3>
+        </div>
+        <button class="ghost-icon" id="editProfileClose" type="button"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="editProfileForm">
+        <label class="avatar-upload">
+          <input type="file" id="editAvatarInput" accept="image/*" hidden>
+          <div id="editAvatarPreview">+</div>
+          <span>Tap to change avatar</span>
+        </label>
+        <div class="input-field"><label>Display Name</label><input type="text" name="displayName" required></div>
+        <div class="input-field"><label>Handle</label><input type="text" name="handle" required></div>
+        <div class="input-field"><label>Bio</label><textarea name="bio" rows="3"></textarea></div>
+        <div class="divider">Security</div>
+        <div class="input-grid">
+          <div class="input-field password-field">
+            <label>Current Password</label>
+            <div class="password-input">
+              <input type="password" name="currentPassword" id="profileCurrentPassword">
+              <button type="button" class="password-toggle" aria-label="Show password"
+                data-target="profileCurrentPassword">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div class="input-field password-field">
+            <label>New Password</label>
+            <div class="password-input">
+              <input type="password" name="newPassword" id="profileNewPassword">
+              <button type="button" class="password-toggle" aria-label="Show password" data-target="profileNewPassword">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="btn primary w-full" type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="storyViewer" class="story-viewer hidden">
+    <div class="story-stage">
+      <div class="story-progress" id="storyProgress"></div>
+      <button class="ghost-icon story-close" id="storyViewerClose"><i class="fas fa-times"></i></button>
+      <div class="story-payload" id="storyPayload"></div>
+      <div class="story-meta" id="storyMeta"></div>
+      <div class="story-controls">
+        <button class="ghost-icon" id="storyPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="ghost-icon" id="storyNext"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="story-actions" id="storyActions"
+        style="position:absolute; top:60px; right:20px; display:flex; gap:10px; flex-direction:column; z-index:10;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal for viewing other users -->
+  <div id="profileModal" class="profile-modal-overlay hidden"
+    onclick="if(event.target===this) window.closeProfileModal()">
+    <div class="profile-modal-content" onclick="event.stopPropagation()">
+      <button class="ghost-icon profile-modal-close" onclick="window.closeProfileModal()" title="Close">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="profile-modal-banner" id="profileModalBanner"></div>
+      <div class="profile-modal-header" id="profileModalHeader"></div>
+      <div class="profile-modal-tabs">
+        <button class="profile-tab active" data-tab="posts">Posts</button>
+        <button class="profile-tab" data-tab="media">Media</button>
+      </div>
+      <div class="profile-modal-feed" id="profileModalFeed"></div>
+    </div>
+  </div>
+
+  <!-- GIF Picker Modal -->
+  <div id="gifPickerModal" class="modal-shell hidden">
+    <div class="modal-card" style="max-width:600px;">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">GIF Picker</p>
+          <h3>Choose a GIF</h3>
+        </div>
+        <button class="ghost-icon" onclick="document.getElementById('gifPickerModal').classList.add('hidden')"><i
+            class="fas fa-times"></i></button>
+      </div>
+      <div style="padding:20px;">
+        <input type="text" id="gifSearchInput" placeholder="Search GIFs..."
+          style="width:100%; padding:12px; border:1px solid var(--border); border-radius:8px; background:var(--input-bg); color:var(--text-main); margin-bottom:20px;">
+        <div id="gifGrid"
+          style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; padding:10px; max-height:400px; overflow-y:auto;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="followDrawer" class="follow-drawer hidden">
+    <div class="follow-drawer-card">
+      <div class="follow-drawer-head">
+        <h4 id="followDrawerTitle">Followers</h4>
+        <button class="ghost-icon" id="followDrawerClose" aria-label="Close followers list">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="followDrawerBody" class="follow-drawer-body"></div>
+    </div>
+  </div>
+
+  <div id="toastContainer" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;"></div>
+
+  <div id="callOverlay" class="call-overlay hidden" data-call-theme="glass">
+    <div class="call-card">
+      <div class="call-user">
+        <div id="callUserAvatar" class="call-avatar">?</div>
+        <div>
+          <p id="callUserName">Calling...</p>
+          <small id="callStatus">Connecting</small>
+        </div>
+      </div>
+      <div class="call-timer" id="callTimer">00:00</div>
+      <div class="call-controls">
+        <button class="call-btn" id="btnCallMute" aria-pressed="false"><i class="fas fa-microphone"></i></button>
+        <button class="call-btn danger" id="btnCallEnd"><i class="fas fa-phone-slash"></i></button>
+        <button class="call-btn success hidden" id="btnCallAccept"><i class="fas fa-phone"></i></button>
+        <button class="call-btn" id="btnCallCamera" aria-pressed="true"><i class="fas fa-video"></i></button>
+      </div>
+      <div class="call-media">
+        <video id="remoteVideo" autoplay playsinline muted disablePictureInPicture></video>
+        <video id="localVideo" autoplay playsinline muted disablePictureInPicture></video>
+      </div>
+      <audio id="remoteAudio" autoplay playsinline></audio>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"
+    integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz"
+    crossorigin="anonymous"></script>
+  <script src="assets/js/performance.js?v=20251210"></script>
+  <script src="assets/js/app.js?v=20251210-optimized"></script>
+  <div id="mobileMenuOverlay" class="hidden"
+    style="position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:11000; display:flex; align-items:flex-end; justify-content:center;">
+    <div class="mobile-menu-card"
+      style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px 16px 0 0; width:100%; max-width:520px; padding:14px; box-shadow:0 -10px 30px rgba(0,0,0,0.4);">
+      <div style="display:flex; justify-content:center; margin-bottom:8px;">
+        <div style="width:40px; height:4px; background:var(--border); border-radius:999px;"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button class="btn secondary" id="mmProfile" type="button" style="justify-content:flex-start;"><i
+            class="fas fa-user"></i>&nbsp; Profile</button>
+        <button class="btn secondary" id="mmTrips" type="button" style="justify-content:flex-start;"><i
+            class="fas fa-map-marked-alt"></i>&nbsp; Trips</button>
+        <button class="btn secondary" id="mmLeaderboard" type="button" style="justify-content:flex-start;"><i
+            class="fas fa-trophy"></i>&nbsp; Leaderboard</button>
+        <button class="btn secondary" id="mmAi" type="button" style="justify-content:flex-start;"><i
+            class="fas fa-robot"></i>&nbsp; AI Assistant</button>
+        <button class="btn danger" id="mmLogout" type="button" style="justify-content:flex-start;"><i
+            class="fas fa-arrow-right-from-bracket"></i>&nbsp; Logout</button>
+      </div>
+    </div>
+  </div>
+  <div id="hfAiModal" class="modal-shell hidden">
+    <div class="modal-card ai-chat-card">
+      <button class="ghost-icon" id="hfAiClose" type="button" aria-label="Close AI chat" style="position: absolute; top: 15px; right: 15px; z-index: 10;"><i
+          class="fas fa-times"></i></button>
+      <div class="ai-chat-head">
+        <div>
+          <p class="eyebrow">AI Assistant</p>
+          <h3>Your realtime creative studio</h3>
+          <small style="color:var(--text-muted); display:block; margin-top:4px;">Ask for scroll-stopping hooks, polished
+            captions, travel inspo and concept art.</small>
+          <div class="ai-mode-toggle" role="group" aria-label="AI response mode" style="margin-top:12px;">
+            <button type="button" class="ai-mode-btn active" data-ai-mode="text">
+              <i class="fas fa-message"></i>
+              Text
+            </button>
+            <button type="button" class="ai-mode-btn" data-ai-mode="image">
+              <i class="fas fa-image"></i>
+              Image
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-status-banner hidden" id="aiStatusBanner">
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <span id="aiStatusBannerText">Thinking…</span>
+      </div>
+
+      <div id="aiChatThread" class="ai-chat-thread">
+        <div class="ai-chat-placeholder">
+          <i class="fas fa-robot"></i>
+          <p>“Need a hook, carousel outline or a mood board? I’ve got you.”</p>
+          <small>Replies can be sent straight into your composer or the last comment box you touched.</small>
+        </div>
+      </div>
+
+      <div class="ai-chat-foot">
+        <div class="ai-chat-input-wrapper">
+          <textarea id="aiChatInput" rows="2" placeholder="Ask me to write a caption, story, or hook..."></textarea>
+          <button class="ai-send-icon-btn" id="aiSendBtn" type="button" title="Send message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <span id="aiChatStatus" class="ai-chat-status hidden"><i class="fas fa-circle-notch fa-spin"></i> Thinking…</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="translatorModal" class="modal-shell hidden">
+    <div class="modal-card"
+      style="width:min(720px,96vw); max-height:calc(100vh - 80px); display:flex; flex-direction:column; gap:16px;">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Realtime</p>
+          <h3>Universal Translator</h3>
+        </div>
+        
+        <button class="ghost-icon" id="translatorClose" type="button"><i class="fas fa-times"></i></button>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <div class="input-field" style="flex:1; min-width:220px;">
+          <label>Target Language</label>
+          <input type="text" id="translatorLangSearch" placeholder="Search languages…">
+          <div id="translatorLangList" class="search-results hidden"
+            style="position:relative; max-height:200px; overflow:auto; margin-top:8px;"></div>
+        </div>
+        <div class="input-field" style="width:220px;">
+          <label>Voice</label>
+          <div style="display:flex; gap:8px;">
+            <button class="btn secondary" id="translatorMicBtn" type="button"><i class="fas fa-microphone"></i>
+              Speak</button>
+            <button class="btn secondary" id="translatorSpeakBtn" type="button"><i class="fas fa-volume-up"></i>
+              Play</button>
+          </div>
+        </div>
+      </div>
+      <div class="input-field">
+        <label>Input</label>
+        <textarea id="translatorInput" rows="3" placeholder="Type or use voice…"></textarea>
+      </div>
+      <div class="input-field">
+        <label>Output</label>
+        <textarea id="translatorOutput" rows="3" placeholder="Translation will appear here" readonly></textarea>
+      </div>
+      <div style="display:flex; gap:10px; margin-right: 16px;">
+          <button class="btn ghost" id="translatorSwapBtn" type="button"><i class="fas fa-exchange-alt"></i>
+            Swap</button>
+          <button class="btn primary" id="translatorTranslateBtn" type="button"><i class="fas fa-language"></i>
+            Translate</button>
+        </div>
+    </div>
+  </div>
+
+  <div id="tripDashboardModal" class="modal-shell hidden">
+    <div class="modal-card"
+      style="width:95%; max-width:900px; height:85vh; display:flex; flex-direction:column; padding:0; background:var(--bg-card); border:1px solid var(--border); box-shadow:0 20px 50px rgba(0,0,0,0.5);">
+
+      <!-- Header -->
+      <div class="modal-head"
+        style="padding:20px 24px; border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02);">
+        <div>
+          <p class="eyebrow"
+            style="color:var(--primary); font-weight:600; letter-spacing:1px; font-size:0.75rem; text-transform:uppercase;">
+            Trip Center</p>
+          <h2 id="tripDashTitle" style="margin:0; font-size:1.5rem;">Dashboard</h2>
+        </div>
+        <button class="ghost-icon" id="closeTripDash"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="modal-body" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+        <!-- Tabs -->
+        <div
+          style="display:flex; gap:8px; padding:16px 24px; border-bottom:1px solid var(--border); overflow-x:auto; background:rgba(0,0,0,0.1);">
+          <button class="dash-tab active" onclick="switchDashTab('overview')"><i class="fas fa-compass"></i>
+            Overview</button>
+          <button class="dash-tab" onclick="switchDashTab('polls')"><i class="fas fa-poll"></i> Polls</button>
+          <button class="dash-tab" onclick="switchDashTab('album')"><i class="fas fa-images"></i> Album</button>
+          <button class="dash-tab" onclick="switchDashTab('chat')"><i class="fas fa-comments"></i> Group Chat</button>
+        </div>
+
+        <!-- Content Areas -->
+        <div id="dashOverview" class="dash-tab-content" style="flex:1; overflow-y:auto; padding:24px;">
+          <!-- Weather Widget -->
+          <div class="card"
+            style="margin-bottom:24px; border:1px solid var(--border); background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));">
+            <div
+              style="padding:16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px;">
+              <i class="fas fa-cloud-sun" style="color:var(--primary);"></i>
+              <h3 style="margin:0; font-size:1.1rem;">Weather Forecast</h3>
+            </div>
+            <div id="dashWeather" style="display:flex; gap:16px; overflow-x:auto; padding:20px;">Loading weather...
+            </div>
+          </div>
+          <!-- Trip Info -->
+          <div class="card" style="border:1px solid var(--border);">
+            <div
+              style="padding:16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px;">
+              <i class="fas fa-info-circle" style="color:var(--primary);"></i>
+              <h3 style="margin:0; font-size:1.1rem;">Trip Details</h3>
+            </div>
+            <div id="dashDetails" style="padding:20px; line-height:1.6; color:var(--text-secondary);"></div>
+          </div>
+        </div>
+
+        <div id="dashPolls" class="dash-tab-content hidden" style="flex:1; overflow-y:auto; padding:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+            <div>
+              <h3 style="margin:0;">Active Polls</h3>
+              <p style="margin:4px 0 0; color:var(--text-muted); font-size:0.9rem;">Vote on upcoming plans</p>
+            </div>
+            <button class="btn primary" onclick="openCreatePollModal()"><i class="fas fa-plus"></i> New Poll</button>
+          </div>
+          <div id="dashPollsList" style="display:flex; flex-direction:column; gap:20px;"></div>
+        </div>
+
+        <div id="dashAlbum" class="dash-tab-content hidden" style="flex:1; overflow-y:auto; padding:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+            <div>
+              <h3 style="margin:0;">Shared Album</h3>
+              <p style="margin:4px 0 0; color:var(--text-muted); font-size:0.9rem;">Collect memories together</p>
+            </div>
+            <div>
+              <button class="btn primary" onclick="document.getElementById('albumUploadInput').click()"><i
+                  class="fas fa-upload"></i> Upload</button>
+              <input type="file" id="albumUploadInput" hidden accept="image/*,video/*"
+                onchange="uploadAlbumMedia(this)">
+            </div>
+          </div>
+          <div id="dashAlbumGrid"
+            style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:16px;"></div>
+        </div>
+
+        <div id="dashChat" class="dash-tab-content hidden"
+          style="flex:1; display:flex; flex-direction:column; overflow:hidden; background:rgba(0,0,0,0.2);">
+          <div id="dashChatMessages"
+            style="flex:1; overflow-y:auto; padding:24px; display:flex; flex-direction:column; gap:12px;"></div>
+          <div
+            style="padding:16px 24px; border-top:1px solid var(--border); display:flex; gap:12px; background:var(--bg-card);">
+            <input type="text" id="dashChatInput" class="input" placeholder="Message the group..."
+              style="border-radius:24px; padding-left:20px;" onkeypress="if(event.key==='Enter') sendTripMessage()">
+            <button class="btn primary" onclick="sendTripMessage()"
+              style="border-radius:50%; width:46px; height:46px; padding:0; display:flex; align-items:center; justify-content:center;"><i
+                class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Poll Modal -->
+  <div id="createPollModal" class="modal-shell hidden" style="z-index:11000;">
+    <div class="modal-card" style="width:min(520px, 90vw);">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Polls</p>
+          <h3>Create Poll</h3>
+        </div>
+        <button class="ghost-icon" onclick="document.getElementById('createPollModal').classList.add('hidden')"><i
+            class="fas fa-times"></i></button>
+      </div>
+      <div style="padding: 20px;">
+        <div class="input-field" style="margin-bottom: 20px;">
+          <label style="font-weight: 600; margin-bottom: 8px; display: block;">Question</label>
+          <input type="text" id="pollQuestion" class="input" placeholder="What should we do?" 
+            style="width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--input-bg); color: var(--text-main); font-size: 1rem;">
+        </div>
+
+        <div style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.3); padding: 16px; border-radius: 12px; border: 1px solid var(--border);">
+          <label style="font-weight: 600; margin-bottom: 12px; display: block;">Options</label>
+          <div id="pollOptionsList" style="display: flex; flex-direction: column; gap: 12px;">
+            <input type="text" class="input poll-option" placeholder="Option 1" 
+              style="width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--input-bg); color: var(--text-main);">
+            <input type="text" class="input poll-option" placeholder="Option 2" 
+              style="width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--input-bg); color: var(--text-main);">
+          </div>
+        </div>
+
+        <button class="btn secondary" onclick="addPollOption()" style="width: 100%; margin-bottom: 12px; padding: 12px; border-radius: 12px; font-weight: 600;">
+          <i class="fas fa-plus"></i> Add Option
+        </button>
+        <button class="btn primary" onclick="submitPoll()" style="width: 100%; padding: 12px; border-radius: 12px; font-weight: 600; font-size: 1rem;">
+          Create Poll
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tripExpensesModal" class="modal-shell hidden">
+    <div class="modal-card" style="width:min(760px,96vw);">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Trip Finances</p>
+          <h3>Smart Expense Splitter</h3>
+        </div>
+        <button class="ghost-icon" id="closeExpenses" type="button"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="input-field"><label>Title</label><input id="expTitle" type="text" placeholder="Dinner at Bistro" />
+      </div>
+      <div style="display:flex; gap:12px;">
+        <div class="input-field" style="flex:1;"><label>Amount</label><input id="expAmount" type="number" step="0.01" />
+        </div>
+        <div class="input-field" style="width:160px;"><label>Currency</label><input id="expCurrency" type="text"
+            value="USD" /></div>
+      </div>
+      <div style="display:flex; gap:12px;">
+        <div class="input-field" style="flex:1;"><label>Paid by</label><select id="expPaidBy"></select></div>
+        <div class="input-field" style="flex:1;"><label>Shared with</label>
+          <div id="expSharedWithBox" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+        </div>
+      </div>
+      <div class="input-field"><label>Note / Receipt text</label><input id="expNote" type="text"
+          placeholder="Optional receipt text for AI parse" /></div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <input type="file" id="expReceipt" accept="image/*" />
+        <button class="btn ghost" id="btnParseReceipt" type="button"><i class="fas fa-wand-magic-sparkles"></i> Parse
+          Text</button>
+        <button class="btn primary" id="btnAddExpense" type="button"><i class="fas fa-plus"></i> Add</button>
+      </div>
+      <div class="divider"></div>
+      <div id="expenseList" class="list"></div>
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
+        <button class="btn secondary" id="btnComputeSettlement" type="button"><i class="fas fa-scale-balanced"></i>
+          Compute Settlement</button>
+      </div>
+      <div id="settlementResults" class="settlement"></div>
+    </div>
+  </div>
+
+  <div id="tripMapModal" class="modal-shell hidden">
+    <div class="modal-card" style="width:min(860px,96vw);">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Itinerary Map</p>
+          <h3>Interactive Route</h3>
+        </div>
+        <button class="ghost-icon" id="closeMap" type="button"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="tripMapView" class="map-frame" style="height:520px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODALS -->
+  <div id="deleteMessageModal" class="modal-shell hidden">
+    <div class="modal-card" style="max-width:420px;">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Delete Message</p>
+          <h3>Remove this message?</h3>
+        </div>
+        <button class="ghost-icon" id="closeDeleteMsgModal" type="button"><i class="fas fa-times"></i></button>
+      </div>
+      <div style="padding:20px; color:var(--text-secondary);">
+        <p>This message will be permanently deleted. This action cannot be undone.</p>
+      </div>
+      <div style="padding:0 20px 20px 20px; display:flex; gap:12px; justify-content:flex-end;">
+        <button class="btn secondary" id="cancelDeleteMsg" type="button">Cancel</button>
+        <button class="btn" style="background:var(--danger); color:white;" id="confirmDeleteMsg" type="button">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="deleteChatModal" class="modal-shell hidden">
+    <div class="modal-card" style="max-width:420px;">
+      <div class="modal-head">
+        <div>
+          <p class="eyebrow">Delete Chat</p>
+          <h3>Delete this conversation?</h3>
+        </div>
+        <button class="ghost-icon" id="closeDeleteChatModal" type="button"><i class="fas fa-times"></i></button>
+      </div>
+      <div style="padding:20px; color:var(--text-secondary);">
+        <p>This conversation and all messages will be permanently deleted. This action cannot be undone.</p>
+      </div>
+      <div style="padding:0 20px 20px 20px; display:flex; gap:12px; justify-content:flex-end;">
+        <button class="btn secondary" id="cancelDeleteChat" type="button">Cancel</button>
+        <button class="btn" style="background:var(--danger); color:white;" id="confirmDeleteChat" type="button">
+          <i class="fas fa-trash"></i> Delete Chat
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Dashboard Tabs */
+    .dash-tab {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dash-tab:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
+    .dash-tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(29, 155, 240, 0.3);
+    }
+
+    /* Weather Widget */
+    .weather-day {
+      min-width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s;
+    }
+
+    .weather-day:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.06);
+    }
+  </style>
+
+  <!-- Leaflet Map Library -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+
+</html>

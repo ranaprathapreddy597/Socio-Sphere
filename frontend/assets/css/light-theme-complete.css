@@ -1,0 +1,176 @@
+/* ================================
+   COMPREHENSIVE LIGHT THEME COMPLETION
+   ================================ */
+
+/* Light Theme - Post Cards */
+[data-theme="light"] .post-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+[data-theme="light"] .post-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.12);
+}
+
+/* Light Theme - Feed Icons */
+[data-theme="light"] .post-actions i {
+  color: #6b7280;
+}
+
+[data-theme="light"] .post-actions button {
+  color: #6b7280;
+}
+
+[data-theme="light"] .post-actions button:hover {
+  color: #6c5dd3;
+}
+
+[data-theme="light"] .post-actions button.liked i {
+  color: #f43f5e;
+}
+
+/* Light Theme - Story & Messaging */
+[data-theme="light"] .story-item {
+  border-color: #d1d5db;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .message-bubble {
+  border-color: #e5e7eb;
+}
+
+[data-theme="light"] .message-item.sent .message-bubble {
+  background: #6c5dd3;
+  color: #ffffff;
+}
+
+[data-theme="light"] .message-item.received .message-bubble {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+
+/* Light Theme - Buttons within Cards */
+[data-theme="light"] .btn.tertiary {
+  background: transparent;
+  color: #6c5dd3;
+  border: 1px solid #e5e7eb;
+}
+
+[data-theme="light"] .btn.tertiary:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* Light Theme - Profile Avatar */
+[data-theme="light"] .orb {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #6b7280;
+}
+
+/* Light Theme - Links */
+[data-theme="light"] a {
+  color: #6c5dd3;
+}
+
+[data-theme="light"] a:hover {
+  color: #5b4cc4;
+  text-decoration: underline;
+}
+
+/* Light Theme - Badges */
+[data-theme="light"] .badge {
+  background: #f3f4f6;
+  color: #111827;
+  border-color: #e5e7eb;
+}
+
+/* Light Theme - Input Focus States */
+[data-theme="light"] textarea:focus,
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus {
+  border-color: #6c5dd3;
+  box-shadow: 0 0 0 3px rgba(108, 93, 211, 0.1);
+}
+
+/* Light Theme - Scrollbar */
+[data-theme="light"]::-webkit-scrollbar {
+  width: 8px;
+}
+
+[data-theme="light"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-theme="light"]::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+[data-theme="light"]::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Light Theme - Tooltip/Popover */
+[data-theme="light"] .tooltip,
+[data-theme="light"] .popover {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Theme - Tag/Label */
+[data-theme="light"] .tag {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+}
+
+[data-theme="light"] .tag.active {
+  background: rgba(108, 93, 211, 0.1);
+  border-color: #6c5dd3;
+  color: #6c5dd3;
+}
+
+/* Light Theme - Dropdown */
+[data-theme="light"] .dropdown-menu {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .dropdown-item:hover {
+  background: #f9fafb;
+  color: #6c5dd3;
+}
+
+/* Light Theme - Loading States */
+[data-theme="light"] .skeleton {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+}
+
+/* Light Theme - Divider */
+[data-theme="light"] hr,
+[data-theme="light"] .divider {
+  border-color: #e5e7eb;
+}
+
+/* Light Theme - Status Indicators */
+[data-theme="light"] .status-online {
+  background: #10b981;
+}
+
+[data-theme="light"] .status-away {
+  background: #f59e0b;
+}
+
+[data-theme="light"] .status-offline {
+  background: #9ca3af;
+}
